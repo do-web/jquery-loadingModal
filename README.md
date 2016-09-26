@@ -1,6 +1,6 @@
 # Installation
 
-You can install [jquery-loadinModal](https://www.npmjs.com/package/jquery-loadingModal) with npm:
+You can install [jquery-loadingModal](https://www.npmjs.com/package/jquery-loadingModal) with npm:
 
 `npm install jquery-loadingModal`
 
