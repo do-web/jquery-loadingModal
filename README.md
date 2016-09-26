@@ -22,7 +22,6 @@ $('body').loadingModal({text: 'Showing loader animations...', 'animation': 'wand
 # Options
 ```html
 position: 'auto',
-textPosition: 'bottom',
 text: '',
 color: '#fff',
 opacity: '0.7',
