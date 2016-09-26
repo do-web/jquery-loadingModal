@@ -1,0 +1,24 @@
+{
+  "name": "jquery-loadingModal",
+  "version": "1.0.0",
+  "main": "jquery.loadingModal.js",
+  "style": "jquery.loadingModal.css",
+  "description": "The simplest loading modal for jQuery",
+  "homepage": "https://github.com/doweb/jquery-loadingModal",
+  "repository": "doweb/jquery-loadingModal",
+  "bugs": "https://github.com/doweb/jquery-loadingModal/issues",
+  "license": "MIT",
+  "author": "Dominik Weber",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-conventional-changelog": "^0.7.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-uglifycss": "^1.0.6",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-sass": "^2.0.3",
+    "spinkit": "^1.2.5",
+    "del": "^1.2.0",
+    "gulp-eslint": "^3.0.1"
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.loadingModal.css">
+
+    <style>
+        #wrapper {
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <button onclick="showModal();">Show loading modal</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/jquery.loadingModal.js"></script>
+<script>
+    function showModal() {
+        $('body').loadingModal({text: 'Showing loader animations...'});
+
+        var delay = function(ms){ return new Promise(function(r) { setTimeout(r, ms) }) };
+        var time = 2000;
+
+        delay(time)
+                .then(function() { $('body').loadingModal('animation', 'rotatingPlane').loadingModal('backgroundColor', 'red'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'wave'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'wanderingCubes').loadingModal('backgroundColor', 'green'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'spinner'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'chasingDots').loadingModal('backgroundColor', 'blue'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'threeBounce'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'circle').loadingModal('backgroundColor', 'black'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'cubeGrid'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'fadingCircle').loadingModal('backgroundColor', 'gray'); return delay(time);})
+                .then(function() { $('body').loadingModal('animation', 'foldingCube'); return delay(time); } )
+                .then(function() { $('body').loadingModal('color', 'black').loadingModal('text', 'Done :-)').loadingModal('backgroundColor', 'yellow');  return delay(time); } )
+                .then(function() { $('body').loadingModal('hide'); return delay(time); } )
+                .then(function() { $('body').loadingModal('destroy') ;} );
+    }
+
+</script>
+</body>
+</html>
