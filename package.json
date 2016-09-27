@@ -1,6 +1,6 @@
 {
   "name": "jquery-loadingModal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "jquery.loadingModal.js",
   "style": "jquery.loadingModal.css",
   "description": "The simplest loading modal for jQuery",

@@ -8,6 +8,7 @@ $spinkit-size: 50px;
 .jquery-loading-modal {
   transform: translateZ(0);
   display: flex;
+  display: -webkit-box;
   position: fixed;
   width: 100%;
   height: 100%;
