@@ -13,19 +13,44 @@
 
     // The actual plugin constructor
     function Plugin(element, options) {
+        var $that = this;
         this.element = element;
         this.animations = {
-            doubleBounce: '<div class="sk-double-bounce"><div class="sk-child sk-double-bounce1"></div><div class="sk-child sk-double-bounce2"></div></div>',
-            rotatingPlane: '<div class="sk-rotating-plane"></div>',
-            wave: '<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>',
-            wanderingCubes: '<div class="sk-wandering-cubes"><div class="sk-cube sk-cube1"></div><div class="sk-cube sk-cube2"></div></div>',
-            spinner: '<div class="sk-spinner sk-spinner-pulse"></div>',
-            chasingDots: '<div class="sk-chasing-dots"><div class="sk-child sk-dot1"></div><div class="sk-child sk-dot2"></div></div>',
-            threeBounce: '<div class="sk-three-bounce"><div class="sk-child sk-bounce1"></div><div class="sk-child sk-bounce2"></div><div class="sk-child sk-bounce3"></div></div>',
-            circle: '<div class="sk-circle"> <div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>',
-            cubeGrid: '<div class="sk-cube-grid"> <div class="sk-cube sk-cube1"></div> <div class="sk-cube sk-cube2"></div> <div class="sk-cube sk-cube3"></div> <div class="sk-cube sk-cube4"></div> <div class="sk-cube sk-cube5"></div> <div class="sk-cube sk-cube6"></div> <div class="sk-cube sk-cube7"></div> <div class="sk-cube sk-cube8"></div> <div class="sk-cube sk-cube9"></div> </div>',
-            fadingCircle: '<div class="sk-fading-circle"> <div class="sk-circle1 sk-circle"></div> <div class="sk-circle2 sk-circle"></div> <div class="sk-circle3 sk-circle"></div> <div class="sk-circle4 sk-circle"></div> <div class="sk-circle5 sk-circle"></div> <div class="sk-circle6 sk-circle"></div> <div class="sk-circle7 sk-circle"></div> <div class="sk-circle8 sk-circle"></div> <div class="sk-circle9 sk-circle"></div> <div class="sk-circle10 sk-circle"></div> <div class="sk-circle11 sk-circle"></div> <div class="sk-circle12 sk-circle"></div> </div>',
-            foldingCube: '<div class="sk-folding-cube"> <div class="sk-cube1 sk-cube"></div> <div class="sk-cube2 sk-cube"></div> <div class="sk-cube4 sk-cube"></div> <div class="sk-cube3 sk-cube"></div> </div>'
+            doubleBounce: {html: '<div class="sk-double-bounce"><div class="sk-child sk-double-bounce1"></div><div class="sk-child sk-double-bounce2"></div></div>'},
+            rotatingPlane: {html: '<div class="sk-rotating-plane"></div>', setBackground: function(color) {
+                $that.animationBox.find('*').each(function (k, e) {
+                    if ($(e).css('background-color') && $(e).css('background-color') != 'rgba(0, 0, 0, 0)') {
+                        $(e).css('background-color', color);
+                    }
+                });
+            }},
+            wave: {html: '<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>'},
+            wanderingCubes: {html: '<div class="sk-wandering-cubes"><div class="sk-cube sk-cube1"></div><div class="sk-cube sk-cube2"></div></div>'},
+            spinner: {html: '<div class="sk-spinner sk-spinner-pulse"></div>'},
+            chasingDots: {html: '<div class="sk-chasing-dots"><div class="sk-child sk-dot1"></div><div class="sk-child sk-dot2"></div></div>'},
+            threeBounce: {html: '<div class="sk-three-bounce"><div class="sk-child sk-bounce1"></div><div class="sk-child sk-bounce2"></div><div class="sk-child sk-bounce3"></div></div>'},
+            circle: {html: '<div class="sk-circle"> <div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>', setBackground: function(color) {
+                $that.animationBox.children().find('*').each(function (k, e) {
+                    if(window.getComputedStyle(e, ':before').getPropertyValue('background-color') !== 'rgba(0, 0, 0, 0)') {
+                        $('body').append($('<style data-custom-style>.' + $(e).attr('class').split(' ')[0] + ':before {background-color: ' + color + ' !important;}</style>'));
+                    }
+                });
+            }},
+            cubeGrid: {html: '<div class="sk-cube-grid"> <div class="sk-cube sk-cube1"></div> <div class="sk-cube sk-cube2"></div> <div class="sk-cube sk-cube3"></div> <div class="sk-cube sk-cube4"></div> <div class="sk-cube sk-cube5"></div> <div class="sk-cube sk-cube6"></div> <div class="sk-cube sk-cube7"></div> <div class="sk-cube sk-cube8"></div> <div class="sk-cube sk-cube9"></div> </div>'},
+            fadingCircle: {html: '<div class="sk-fading-circle"> <div class="sk-circle1 sk-circle"></div> <div class="sk-circle2 sk-circle"></div> <div class="sk-circle3 sk-circle"></div> <div class="sk-circle4 sk-circle"></div> <div class="sk-circle5 sk-circle"></div> <div class="sk-circle6 sk-circle"></div> <div class="sk-circle7 sk-circle"></div> <div class="sk-circle8 sk-circle"></div> <div class="sk-circle9 sk-circle"></div> <div class="sk-circle10 sk-circle"></div> <div class="sk-circle11 sk-circle"></div> <div class="sk-circle12 sk-circle"></div> </div>', setBackground: function(color) {
+                $that.animationBox.children().find('*').each(function (k, e) {
+                    if(window.getComputedStyle(e, ':before').getPropertyValue('background-color') !== 'rgba(0, 0, 0, 0)') {
+                        $('body').append($('<style data-custom-style>.' + $(e).attr('class').split(' ')[0] + ':before {background-color: ' + color + ' !important;}</style>'));
+                    }
+                });
+            }},
+            foldingCube: {html: '<div class="sk-folding-cube"> <div class="sk-cube1 sk-cube"></div> <div class="sk-cube2 sk-cube"></div> <div class="sk-cube4 sk-cube"></div> <div class="sk-cube3 sk-cube"></div> </div>', setBackground: function(color) {
+                $that.animationBox.find('*').each(function (k, e) {
+                    if(window.getComputedStyle(e, ':before').getPropertyValue('background-color') !== 'rgba(0, 0, 0, 0)') {
+                        $('body').append($('<style data-custom-style>.' + $(e).attr('class').split(' ')[0] + ':before {background-color: ' + color + ' !important;}</style>'));
+                    }
+                });
+            }}
         };
 
         // jQuery has an extend method which merges the contents of two or
@@ -33,12 +58,11 @@
         // is generally empty as we don't want to alter the default options for
         // future instances of the plugin
         this.settings = $.extend({}, defaults, options);
-        this._defaults = defaults;
-        this._name = pluginName;
         this.modal = null;
         this.modalText = null;
         this.animationBox = null;
         this.modalBg = null;
+        this.currenAnimation = null;
         this.init();
         return this;
     }
@@ -61,7 +85,8 @@
             }
 
             // Add selected animation loader element
-            $animationBox.append(this.animations[this.settings.animation]);
+            this.currenAnimation = this.animations[this.settings.animation];
+            $animationBox.append(this.currenAnimation.html);
             $infoBox.append($animationBox).append($text);
 
             $modal.append($modalBg);
@@ -98,15 +123,20 @@
             $('[data-custom-style]').remove();
 
             this.modalText.css('color', color);
-            this.animationBox.find('*').each(function (k, e) {
-                if ($(e).css('background-color') && $(e).css('background-color') != 'rgba(0, 0, 0, 0)') {
-                    $(e).css('background-color', color);
-                }
 
-                if(window.getComputedStyle(e, ':before').getPropertyValue('background-color') !== 'rgba(0, 0, 0, 0)') {
-                    $('body').append('<style data-custom-style>.' + $(e).attr('class').split(' ')[0] + ':before {background-color: ' + color + ' !important;}</style>');
-                }
-            });
+            if(this.currenAnimation.setBackground) {
+                this.currenAnimation.setBackground(color);
+            } else {
+                this.animationBox.children().find('*').each(function (k, e) {
+                    if ($(e).css('background-color') && $(e).css('background-color') != 'rgba(0, 0, 0, 0)') {
+                        $(e).css('background-color', color);
+                    }
+
+                    if(window.getComputedStyle(e, ':before').getPropertyValue('background-color') !== 'rgba(0, 0, 0, 0)') {
+                        $('body').append($('<style data-custom-style>.' + $(e).attr('class').split(' ')[0] + ':before {background-color: ' + color + ' !important;}</style>'));
+                    }
+                });
+            }
         },
         opacity: function (opacity) {
             this.modalBg.css({'opacity': opacity});
@@ -116,7 +146,8 @@
         },
         animation: function (animation) {
             this.animationBox.html('');
-            this.animationBox.append(this.animations[animation]);
+            this.currenAnimation = this.animations[animation];
+            this.animationBox.append(this.currenAnimation.html);
         },
         destroy: function () {
             $('[data-custom-style]').remove();

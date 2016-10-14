@@ -25,11 +25,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="js/jquery.loadingModal.js"></script>
 <script>
-    $('body').loadingModal({text: 'Showing loader animations...'});
     function showModal() {
         $('body').loadingModal({text: 'Showing loader animations...'});
 
-        var delay = function(ms){ return new Promise(function(r) { setTimeout(r, ms) }) };
+        var delay = function(ms){ return new Promise(function(r) { setTimeout(r, ms); }) };
         var time = 2000;
 
         delay(time)
